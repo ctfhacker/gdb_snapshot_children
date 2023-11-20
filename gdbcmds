@@ -1,0 +1,34 @@
+# Begin by breaking on forks, but keeping the debugger
+# attached to the parent process
+set follow-fork-mode parent
+set detach-on-fork off
+break fork
+
+# Start the main process
+run
+
+# Spawn the first 5 children, but immediately detach from them
+continue
+detach inferiors 2
+continue
+detach inferiors 3
+continue
+detach inferiors 4
+continue
+detach inferiors 5
+continue
+detach inferiors 6
+continue
+
+# On the sixth child, attach to that one and detach from the parent
+inferior 7
+detach inferiors 1
+
+# Remove the fork breakpoint
+bc *
+
+# Continue execution
+c
+
+# Finally detach from the sixth child to continue execution
+# Which should hit the debug breakpoint with no other breakpoints set
