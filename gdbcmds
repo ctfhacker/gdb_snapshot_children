@@ -9,14 +9,20 @@ run
 
 # Spawn the first 5 children, but immediately detach from them
 continue
+
+info inferiors
 detach inferiors 2
 continue
+info inferiors
 detach inferiors 3
 continue
+info inferiors
 detach inferiors 4
 continue
+info inferiors
 detach inferiors 5
 continue
+info inferiors
 detach inferiors 6
 continue
 
@@ -25,10 +31,19 @@ inferior 7
 detach inferiors 1
 
 # Remove the fork breakpoint
-bc *
+disable breakpoints
 
-# Continue execution
-c
+# Contine to the breakpoint in this child
+continue
+
+# Display the instructions before the taking the snapshot
+x/8i $rip
 
 # Finally detach from the sixth child to continue execution
 # Which should hit the debug breakpoint with no other breakpoints set
+
+# Original gdbcmds
+source /snapchange/gdbsnapshot.py
+ni
+ni
+quit

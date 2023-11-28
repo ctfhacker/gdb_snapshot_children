@@ -1,0 +1,2 @@
+pub const CR3: u64 = 0x000000011041c000;
+pub const RIP: u64 = 0x0000555555555216;

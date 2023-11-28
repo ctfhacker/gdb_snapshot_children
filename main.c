@@ -11,6 +11,7 @@ int main() {
             if (i == 6) {
                 // Child 6 is the target child that we want to debug
                 __asm__("int3");
+                __asm__("vmcall");
                 return 0xdeadbeef;
             } else {
                 // All other children we just want to continue as normal
